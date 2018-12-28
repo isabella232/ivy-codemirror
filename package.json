@@ -1,12 +1,12 @@
 {
   "name": "ivy-codemirror",
   "version": "2.1.0",
-  "description": "Ember component for CodeMirror.",
+  "description": "Ember component for CodeMirror (patched to work with FastBoot)",
   "keywords": [
     "codemirror",
     "ember-addon"
   ],
-  "repository": "https://github.com/IvyApp/ivy-codemirror",
+  "repository": "https://github.com/rancher/ivy-codemirror",
   "license": "MIT",
   "author": "",
   "directories": {

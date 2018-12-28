@@ -1,6 +1,7 @@
 'use strict';
 
-var path = require('path');
+const path = require('path');
+const map = require('broccoli-stew').map;
 
 module.exports = {
   init: function() {
@@ -52,10 +53,6 @@ module.exports = {
 
     if (app.options.codemirror) {
       Object.assign(this.addonConfig, app.options.codemirror);
-    }
-
-    if (process.env.EMBER_CLI_FASTBOOT) {
-      return;
     }
 
     this._super.included.apply(this, arguments);
@@ -125,11 +122,38 @@ module.exports = {
 
         return {
           import: ['lib/codemirror.css'].concat(addonStyles, themeStyles),
-          vendor: [
-            'lib/codemirror.js',
-            'addon/mode/simple.js',
-            'addon/mode/multiplex.js'
-          ].concat(addonScripts, modeScripts, keyMapScripts)
+
+          vendor: {
+            include: [
+              'lib/codemirror.js',
+              'addon/mode/simple.js',
+              'addon/mode/multiplex.js'
+            ].concat(addonScripts, modeScripts, keyMapScripts),
+
+            processTree(tree) {
+              return map(tree, (content) => {
+                return `var _madeNavigator = false;
+                if (typeof navigator === 'undefined') {
+                  _madeNavigator = true;
+                  var navigator = {};
+                }
+                var _madeDocument = false;
+                if ( typeof document === 'undefined' ) {
+                  _madeDocument = true;
+                  var document = {
+                    createElement: function() { return { setAttribute: function() {} }; }
+                  };
+                }
+                ${content}
+                if ( _madeNavigator ) {
+                  navigator = undefined;
+                }
+                if ( _madeDocument ) {
+                  document = undefined;
+                }`;
+              });
+            }
+          }
         };
       }
     }
