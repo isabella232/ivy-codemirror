@@ -1,6 +1,7 @@
 'use strict';
 
-var path = require('path');
+const path = require('path');
+const map = require('broccoli-stew').map;
 
 module.exports = {
   init: function() {
