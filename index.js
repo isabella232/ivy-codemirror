@@ -132,7 +132,25 @@ module.exports = {
 
             processTree(tree) {
               return map(tree, (content) => {
-                return `if (typeof FastBoot === 'undefined') {\n ${content} \n}`;
+                return `var _madeNavigator = false;
+                if (typeof navigator === 'undefined') {
+                  _madeNavigator = true;
+                  var navigator = {};
+                }
+                var _madeDocument = false;
+                if ( typeof document === 'undefined' ) {
+                  _madeDocument = true;
+                  var document = {
+                    createElement: function() { return { setAttribute: function() {} }; }
+                  };
+                }
+                ${content}
+                if ( _madeNavigator ) {
+                  navigator = undefined;
+                }
+                if ( _madeDocument ) {
+                  document = undefined;
+                }`;
               });
             }
           }
