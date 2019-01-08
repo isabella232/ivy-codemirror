@@ -59,11 +59,3 @@ install:
 
 script:
   - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO
-
-notifications:
-  email: false
-  slack:
-    on_success: change
-    on_failure: always
-    rooms:
-      - secure: iJgStcKlpjxRESM8b7dyx4wuJR49dDXlVTtCupru/4SgTIF9qC+5BoV9Px7GFXD1bB7aGQKh2MY7jBT9QgQcZYJVa70pR10EOoR4dVwYsvzjpF2kYD3WXnDH8OX61ASSH1iBpYP8KzQ4Y00j/5FLgqErxVN6ykcSQvwUL2fsE/I=
