@@ -1,6 +1,6 @@
 {
-  "name": "ivy-codemirror",
-  "version": "2.1.0",
+  "name": "@rancher/ivy-codemirror",
+  "version": "2.1.2",
   "description": "Ember component for CodeMirror (patched to work with FastBoot)",
   "keywords": [
     "codemirror",

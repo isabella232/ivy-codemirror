@@ -1,1 +1,1 @@
-export { default } from 'ivy-codemirror/components/ivy-codemirror';
+export { default } from '@rancher/ivy-codemirror/components/ivy-codemirror';
